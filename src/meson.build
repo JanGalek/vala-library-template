@@ -1,9 +1,13 @@
 lib_sources = files('vala-library-template.vala')
 
+vala_testcases_dep = dependency('vala_testcases', fallback: ['vala_testcases', 'vala_testcases_dep'])
+
 vala_lib_deps = [
   dependency('glib-2.0'),
   dependency('gio-2.0'),
-  dependency('libsoup-3.0')
+  dependency('libsoup-3.0'),
+  dependency('gee-0.8'),
+  vala_testcases_dep
 ]
 
 vala_lib = shared_library(
