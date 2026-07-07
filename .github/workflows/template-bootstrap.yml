@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   bootstrap:
-    if: github.repository != 'JanGalek/vala-library-template'
+    if: github.repository != 'ValaFoundation/library-template'
     runs-on: ubuntu-latest
 
     steps:
