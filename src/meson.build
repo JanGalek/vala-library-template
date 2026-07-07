@@ -1,35 +1,31 @@
-lib_sources = files('vala-library-template.vala')
+library_sources = files('library.vala')
 
-vala_testcases_dep = dependency('vala_testcases', fallback: ['vala_testcases', 'vala_testcases_dep'])
-
-vala_lib_deps = [
+library_deps = [
   dependency('glib-2.0'),
   dependency('gio-2.0'),
-  dependency('libsoup-3.0'),
   dependency('gee-0.8'),
-  vala_testcases_dep
 ]
 
-vala_lib = shared_library(
-  'vala-library-template',
-  lib_sources,
-  dependencies: vala_lib_deps,
+library_shared = shared_library(
+  meson.project_name(),
+  library_sources,
+  dependencies: library_deps,
   install: true,
-  vala_vapi: 'vala-library-template.vapi',
-  vala_header: 'vala-library-template.h'
+  vala_vapi: 'vapi/' + meson.project_name() + '.vapi',
+  vala_header: meson.project_name() + '.h'
 )
 
-vala_lib_dep = declare_dependency(
-  link_with: vala_lib,
+library_dep = declare_dependency(
+  link_with: library_shared,
   include_directories: include_directories('.'),
-  sources: lib_sources
+  sources: library_sources
 )
 
 pkg = import('pkgconfig')
 pkg.generate(
-  vala_lib,
-  version: '1.0',
-  name: 'vala-library-template',
-  filebase: 'vala-library-template',
+  library_shared,
+  version: meson.project_version(),
+  name: meson.project_name(),
+  filebase: meson.project_name(),
   description: 'Vala Library Template.'
 )

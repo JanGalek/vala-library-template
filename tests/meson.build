@@ -4,11 +4,13 @@ test_sources = files(
   'example_test.vala',
 )
 
+vala_testcases_dep = dependency('vala_testcases', fallback: ['vala_testcases', 'vala_testcase_dep'])
+
 
 test_exe = executable('tests',
   test_sources,
-  dependencies: vala_lib_deps,
-  link_with: vala_lib,
+  dependencies: [dependency('gee-0.8'), vala_testcases_dep],
+  link_with: library_shared,
   include_directories: [include_directories('../src')],
   vala_args: ['--target-glib=2.58'],
 )
