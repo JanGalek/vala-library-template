@@ -4,4 +4,4 @@ subdir('src')
 subdir('tests')
 
 project_dep_name = meson.project_name().replace('-', '_')
-meson.override_dependency(project_dep_name, library_dep)
+meson.override_dependency(project_dep_name, vala_library_template_dep)

@@ -63,6 +63,8 @@ fi
 FILES=(
   "README.md"
   "meson.build"
+  "src/meson.build"
+  "tests/meson.build"
   ".github/workflows/release.yml"
   ".github/ISSUE_TEMPLATE/config.yml"
   "init.sh"
@@ -70,7 +72,7 @@ FILES=(
 )
 
 replace_all "$OLD_SLUG" "$NEW_SLUG" "${FILES[@]}"
-replace_all "$OLD_DEP_NAME" "$NEW_DEP_NAME" "${FILES[@]}" "meson.build"
+replace_all "$OLD_DEP_NAME" "$NEW_DEP_NAME" "${FILES[@]}"
 replace_all "$OLD_GH_REPO" "$NEW_GH_REPO" "${FILES[@]}"
 replace_all "$OLD_TITLE" "$NEW_TITLE" "README.md"
 
