@@ -90,3 +90,8 @@ echo -e "Next steps:"
 echo -e "  1) Review README.md"
 echo -e "  2) Run: meson setup builddir && meson compile -C builddir"
 echo -e "  3) Run: meson test -C builddir"
+
+SCRIPT_PATH="${BASH_SOURCE[0]:-}"
+if [ "${KEEP_SCRIPT:-0}" != "1" ] && [ -n "${SCRIPT_PATH}" ] && [ -f "${SCRIPT_PATH}" ]; then
+  rm -f -- "${SCRIPT_PATH}" || true
+fi

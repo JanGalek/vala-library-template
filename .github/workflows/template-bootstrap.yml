@@ -26,16 +26,19 @@ jobs:
         run: |
           set -euo pipefail
 
-          if ! grep -q "project('vala-library-template'" meson.build; then
-            echo "Template already bootstrapped, nothing to do."
-            exit 0
+          if grep -q "project('vala-library-template'" meson.build; then
+            chmod +x bootstrap-template.sh
+            ./bootstrap-template.sh "${GITHUB_REPOSITORY##*/}"
+          else
+            echo "Template already bootstrapped."
           fi
 
-          chmod +x bootstrap-template.sh
-          ./bootstrap-template.sh "${GITHUB_REPOSITORY##*/}"
+          if [ -f ".github/workflows/template-bootstrap.yml" ]; then
+            rm -f ".github/workflows/template-bootstrap.yml"
+          fi
 
           if git diff --quiet; then
-            echo "No changes produced by bootstrap."
+            echo "No changes to commit."
             exit 0
           fi
 
