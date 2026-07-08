@@ -9,7 +9,6 @@ on:
 
 permissions:
   contents: write
-  workflows: write
 
 jobs:
   bootstrap:
@@ -34,9 +33,9 @@ jobs:
             echo "Template already bootstrapped."
           fi
 
-          if [ -f ".github/workflows/template-bootstrap.yml" ]; then
-            rm -f ".github/workflows/template-bootstrap.yml"
-          fi
+          # Organization policies may block workflow-file updates from GitHub App tokens.
+          # Keep bootstrap focused on non-workflow files so push is always permitted.
+          git checkout -- .github/workflows || true
 
           if git diff --quiet; then
             echo "No changes to commit."

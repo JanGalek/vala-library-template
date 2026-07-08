@@ -84,7 +84,6 @@ FILES=(
   "meson.build"
   "src/meson.build"
   "tests/meson.build"
-  ".github/workflows/release.yml"
   ".github/ISSUE_TEMPLATE/config.yml"
   "init.sh"
   "init-local-vapi.sh"
