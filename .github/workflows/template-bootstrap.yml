@@ -34,10 +34,6 @@ jobs:
             echo "Template already bootstrapped."
           fi
 
-          if [ -f ".github/workflows/template-bootstrap.yml" ]; then
-            rm -f ".github/workflows/template-bootstrap.yml"
-          fi
-
           if git diff --quiet; then
             echo "No changes to commit."
             exit 0
